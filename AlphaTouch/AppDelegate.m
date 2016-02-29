@@ -16,7 +16,29 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
+    
+    CGRect viewRect = [[UIScreen mainScreen] bounds];
+    
+    // 1. This is our canvas (UIWindow)
+    
+    self.window = [[UIWindow alloc] initWithFrame:viewRect];
+    
+    // 2. And here is our brush (UIViewController)
+    
+    UIViewController *colorUIController = [[UIViewController alloc] init];
+    self.window.rootViewController = colorUIController;
+    
+    // 3. There is our paint (UIView)
+    
+    UIView *view = [[UIView alloc] initWithFrame:viewRect];
+    view.backgroundColor = [UIColor yellowColor];
+    colorUIController.view = view;
+    
+    [self.window makeKeyAndVisible];
+    
+    NSLog(@"If you are seeing this, well, it actually works");
+    NSLog(@"This window tall is %f and width is %f", viewRect.size.height, viewRect.size.width);
+    
     return YES;
 }
 
