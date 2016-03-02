@@ -18,16 +18,30 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor yellowColor];
     
-    UIButton *firstButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    UIButton *firstButton = [UIButton buttonWithType: UIButtonTypeRoundedRect];
     firstButton.frame = CGRectMake(100, 100, 100, 44);
     [firstButton setTitle:@"Click me!" forState:UIControlStateNormal];
+    [firstButton addTarget:self
+                    action:@selector(buttonPressed:)
+          forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:firstButton];
+    
+    UILabel *firstLabel = [[UILabel alloc] initWithFrame:CGRectMake(50, 30, 200, 44)];
+    firstLabel.text = @"Hello, welcome to my app!";
+    [self.view addSubview:firstLabel];
 }
 
 - (void)loadView {
     CGRect viewRect = [[UIScreen mainScreen] bounds];
     UIView *view = [[UIView alloc] initWithFrame:viewRect];
+    
     self.view = view;
+}
+
+- (void)buttonPressed:(UIButton *)sender {
+    NSLog(@"Button pressed, send: %@", sender);
+    self.view.alpha = ((double) arc4random() / 0x100000000);
+    [sender removeFromSuperview];
 }
 
 - (void)didReceiveMemoryWarning {
