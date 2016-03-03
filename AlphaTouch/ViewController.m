@@ -20,11 +20,20 @@
     
     UIButton *firstButton = [UIButton buttonWithType: UIButtonTypeRoundedRect];
     firstButton.frame = CGRectMake(100, 100, 100, 44);
-    [firstButton setTitle:@"Click me!" forState:UIControlStateNormal];
+    [firstButton setTitle:@"Make 50%" forState:UIControlStateNormal];
     [firstButton addTarget:self
                     action:@selector(buttonPressed:)
           forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:firstButton];
+    
+    
+    UIButton *secondButton = [UIButton buttonWithType: UIButtonTypeRoundedRect];
+    secondButton.frame = CGRectMake(100, 300, 100, 44);
+    [secondButton setTitle:@"Make 100%" forState:UIControlStateNormal];
+    [secondButton addTarget:self
+                    action:@selector(buttonPressed:)
+          forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:secondButton];
     
     UILabel *firstLabel = [[UILabel alloc] initWithFrame:CGRectMake(50, 30, 200, 44)];
     firstLabel.text = @"Hello, welcome to my app!";
@@ -40,8 +49,12 @@
 
 - (void)buttonPressed:(UIButton *)sender {
     NSLog(@"Button pressed, send: %@", sender);
-    self.view.alpha = ((double) arc4random() / 0x100000000);
-    [sender removeFromSuperview];
+    
+    if ([sender.titleLabel.text isEqualToString:@"Make 50%"]) {
+        self.view.alpha = .5;
+    } else {
+        self.view.alpha = 1;
+    }
 }
 
 - (void)didReceiveMemoryWarning {
